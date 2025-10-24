@@ -526,6 +526,7 @@ export class VueElement extends BaseClass {
   }
 
   private _applyStyles(styles: string[] | undefined) {
+    console.log('applyStyles', styles);
     if (styles) {
       styles.forEach(css => {
         const s = document.createElement('style')
