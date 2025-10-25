@@ -60,7 +60,6 @@ export const defineCustomElement = ({
     emits: rootComponent?.emits,
     
     setup(props, { slots }) {
-      console.log('HELLLOOOO');
       const emitsList = [...(rootComponent?.emits || []), 'update:modelValue']
       const app = createApp()
       app.component('app-root', rootComponent)
@@ -87,12 +86,9 @@ export const defineCustomElement = ({
               this.__style = document.createElement('style')
               this.__style.innerText = styles.join().replace(/\n/g, '')
               if (nonce) this.__style.setAttribute('nonce', nonce);
-              const lastStyles = document.querySelector('style')[-1];
-              nearestElement(lastStyles ?? this.$el).append(this.__style)
+              nearestElement(this.$el).append(this.__style)
             }
           }
-
-          this.$el.appendChild(document.createElement('div').setAttribute('id', 'TESTING'));
 
           insertStyles(this.$?.type.styles);
           if (this.$options.components) {
