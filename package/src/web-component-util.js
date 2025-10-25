@@ -90,6 +90,7 @@ export const defineCustomElement = ({
             }
           }
 
+          console.log('this.$?.type.styles', this.$?.type.styles);
           insertStyles(this.$?.type.styles);
           if (this.$options.components) {
             for (const comp of Object.values(this.$options.components)) {
