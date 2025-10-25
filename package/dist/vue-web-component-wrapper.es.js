@@ -1,7 +1,7 @@
-var F = Object.defineProperty;
-var G = (e, r, t) => r in e ? F(e, r, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[r] = t;
-var m = (e, r, t) => G(e, typeof r != "symbol" ? r + "" : r, t);
-import { defineComponent as W, nextTick as X, render as D, createVNode as I, h as R } from "vue";
+var G = Object.defineProperty;
+var W = (e, r, t) => r in e ? G(e, r, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[r] = t;
+var m = (e, r, t) => W(e, typeof r != "symbol" ? r + "" : r, t);
+import { defineComponent as X, nextTick as I, render as $, createVNode as Z, h as R } from "vue";
 /**
 * @vue/shared v3.5.13
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
@@ -9,21 +9,21 @@ import { defineComponent as W, nextTick as X, render as D, createVNode as I, h a
 **/
 process.env.NODE_ENV !== "production" && Object.freeze({});
 process.env.NODE_ENV !== "production" && Object.freeze([]);
-const Z = Object.assign, $ = Array.isArray, J = (e) => typeof e == "string", B = (e) => {
+const J = Object.assign, C = Array.isArray, Q = (e) => typeof e == "string", M = (e) => {
   const r = /* @__PURE__ */ Object.create(null);
   return (t) => r[t] || (r[t] = e(t));
-}, Q = /-(\w)/g, S = B(
-  (e) => e.replace(Q, (r, t) => t ? t.toUpperCase() : "")
-), Y = /\B([A-Z])/g, N = B(
-  (e) => e.replace(Y, "-$1").toLowerCase()
-), C = (e) => {
-  const r = J(e) ? Number(e) : NaN;
+}, Y = /-(\w)/g, S = M(
+  (e) => e.replace(Y, (r, t) => t ? t.toUpperCase() : "")
+), ee = /\B([A-Z])/g, N = M(
+  (e) => e.replace(ee, "-$1").toLowerCase()
+), H = (e) => {
+  const r = Q(e) ? Number(e) : NaN;
   return isNaN(r) ? e : r;
 };
 /*!#__NO_SIDE_EFFECTS__*/
 // @__NO_SIDE_EFFECTS__
-function ee(e, r, t) {
-  const s = W(e);
+function te(e, r, t) {
+  const s = X(e);
   class o extends T {
     constructor(i) {
       super(s, i, r, t);
@@ -31,9 +31,9 @@ function ee(e, r, t) {
   }
   return m(o, "def", s), o;
 }
-const te = typeof HTMLElement < "u" ? HTMLElement : class {
+const se = typeof HTMLElement < "u" ? HTMLElement : class {
 };
-class T extends te {
+class T extends se {
   constructor(t, s = {}, o = { shadowRoot: !0 }, n) {
     super();
     /**
@@ -55,8 +55,8 @@ class T extends te {
     this._connected = !0, this._instance || (this._resolved ? this._update() : this._resolveDef());
   }
   disconnectedCallback() {
-    this._connected = !1, X(() => {
-      this._connected || (this._ob && (this._ob.disconnect(), this._ob = null), D(null, this._root), this._instance = null);
+    this._connected = !1, I(() => {
+      this._connected || (this._ob && (this._ob.disconnect(), this._ob = null), $(null, this._root), this._instance = null);
     });
   }
   /**
@@ -74,15 +74,15 @@ class T extends te {
       var y;
       const { props: i } = o, _ = this._collectNestedStyles(o);
       let E;
-      if (i && !$(i))
-        for (const h in i) {
-          const c = i[h];
-          (c === Number || c && c.type === Number) && (h in this._props && (this._props[h] = C(this._props[h])), (E || (E = /* @__PURE__ */ Object.create(null)))[S(h)] = !0);
+      if (i && !C(i))
+        for (const d in i) {
+          const c = i[d];
+          (c === Number || c && c.type === Number) && (d in this._props && (this._props[d] = H(this._props[d])), (E || (E = /* @__PURE__ */ Object.create(null)))[S(d)] = !0);
         }
       if (this._numberProps = E, n && this._resolveProps(o), !this._config.shadowRoot) {
         this._slots = {};
-        const h = (c) => Array.from(c).map((l) => {
-          var d;
+        const d = (c) => Array.from(c).map((l) => {
+          var h;
           if (l.nodeType === Node.ELEMENT_NODE) {
             const u = l, b = Object.fromEntries(
               Array.from(u.attributes).map((O) => [O.name, O.value])
@@ -90,28 +90,28 @@ class T extends te {
             return R(
               u.tagName.toLowerCase(),
               b,
-              h(u.childNodes)
+              d(u.childNodes)
             );
           } else if (l.nodeType === Node.TEXT_NODE)
-            return ((d = l.textContent) == null ? void 0 : d.trim()) || null;
+            return ((h = l.textContent) == null ? void 0 : h.trim()) || null;
           return null;
         }).filter((l) => l != null);
         for (const c of Array.from(this.childNodes)) {
           const l = c.nodeType === Node.ELEMENT_NODE && c.getAttribute("slot") || "default";
           if (this._slots[l] || (this._slots[l] = []), c.nodeType === Node.ELEMENT_NODE) {
-            const d = c, u = Object.fromEntries(
-              Array.from(d.attributes).map((b) => [b.name, b.value])
+            const h = c, u = Object.fromEntries(
+              Array.from(h.attributes).map((b) => [b.name, b.value])
             );
             this._slots[l].push(
               R(
-                d.tagName.toLowerCase(),
+                h.tagName.toLowerCase(),
                 u,
-                h(d.childNodes)
+                d(h.childNodes)
               )
             );
           } else if (c.nodeType === Node.TEXT_NODE) {
-            const d = (y = c.textContent) == null ? void 0 : y.trim();
-            d && this._slots[l].push(d);
+            const h = (y = c.textContent) == null ? void 0 : y.trim();
+            h && this._slots[l].push(h);
           }
         }
         this.replaceChildren();
@@ -121,7 +121,7 @@ class T extends te {
     s ? s().then((o) => t(o, !0)) : t(this._def);
   }
   _resolveProps(t) {
-    const { props: s } = t, o = $(s) ? s : Object.keys(s || {});
+    const { props: s } = t, o = C(s) ? s : Object.keys(s || {});
     for (const n of Object.keys(this))
       n[0] !== "_" && o.includes(n) && this._setProp(n, this[n], !0, !1);
     for (const n of o.map(S))
@@ -137,7 +137,7 @@ class T extends te {
   _setAttr(t) {
     let s = this.hasAttribute(t) ? this.getAttribute(t) : void 0;
     const o = S(t);
-    this._numberProps && this._numberProps[o] && (s = C(s)), this._setProp(o, s, !1);
+    this._numberProps && this._numberProps[o] && (s = H(s)), this._setProp(o, s, !1);
   }
   /**
    * @internal
@@ -152,10 +152,10 @@ class T extends te {
     s !== this._props[t] && (this._props[t] = s, n && this._instance && this._update(), o && (s === !0 ? this.setAttribute(N(t), "") : typeof s == "string" || typeof s == "number" ? this.setAttribute(N(t), s + "") : s || this.removeAttribute(N(t))));
   }
   _update() {
-    D(this._createVNode(), this._root);
+    $(this._createVNode(), this._root);
   }
   _createVNode() {
-    const t = I(this._def, Z({}, this._props), this._slots);
+    const t = Z(this._def, J({}, this._props), this._slots);
     return this._instance || (t.ce = (s) => {
       this._instance = s, s.isCE = !0;
       const o = (i, _) => {
@@ -189,7 +189,7 @@ class T extends te {
     }), s;
   }
 }
-const H = (e) => {
+const B = (e) => {
   for (; (e == null ? void 0 : e.nodeType) !== 1; ) {
     if (!e.parentElement)
       throw new Error(
@@ -199,13 +199,13 @@ const H = (e) => {
   }
   return e;
 };
-function se(e) {
+function oe(e) {
   return "on" + e.charAt(0).toUpperCase() + e.slice(1);
 }
-function oe(e) {
+function ne(e) {
   return typeof e == "string" ? e.replace(/:root/g, ":host") : Array.isArray(e) ? e.map((r) => r.replace(/:root/g, ":host")) : e;
 }
-const ne = ({
+const re = ({
   rootComponent: e,
   plugins: r,
   cssFrameworkStyles: t,
@@ -216,14 +216,14 @@ const ne = ({
   elementName: _,
   disableRemoveStylesOnUnmount: E,
   disableShadowDOM: y,
-  replaceRootWithHostInCssFramework: h,
+  replaceRootWithHostInCssFramework: d,
   asyncInitialization: c,
   loaderAttribute: l,
-  hideSlotContentUntilMounted: d,
+  hideSlotContentUntilMounted: h,
   nonce: u
 }) => {
   console.log("defineCustomElement called");
-  const b = y ? ee : s, O = h ? oe(t) : t, M = b({
+  const b = y ? te : s, O = d ? ne(t) : t, K = b({
     styles: [O],
     nonce: u,
     props: {
@@ -232,7 +232,7 @@ const ne = ({
       // v-model support
     },
     emits: e == null ? void 0 : e.emits,
-    setup(K, { slots: U }) {
+    setup(U, { slots: z }) {
       var L;
       const P = [...(e == null ? void 0 : e.emits) || [], "update:modelValue"], f = n();
       if (f.component("app-root", e), e.provide) {
@@ -243,20 +243,20 @@ const ne = ({
       }
       f.mixin({
         mounted() {
-          var w, A, j, V;
+          var w, A, j, V, x;
           if (((A = (w = this.$) == null ? void 0 : w.type) == null ? void 0 : A.name) === "vue-custom-element-root-component")
             return;
           const a = (v) => {
-            v != null && v.length && (this.__style = document.createElement("style"), this.__style.innerText = v.join().replace(/\n/g, ""), u && this.__style.setAttribute("nonce", u), H(this.$el).append(this.__style));
+            v != null && v.length && (this.__style = document.createElement("style"), this.__style.innerText = v.join().replace(/\n/g, ""), u && this.__style.setAttribute("nonce", u), B(this.$el).append(this.__style));
           };
-          if (a((j = this.$) == null ? void 0 : j.type.styles), this.$options.components)
+          if (console.log("this.$?.type.styles", (j = this.$) == null ? void 0 : j.type.styles), a((V = this.$) == null ? void 0 : V.type.styles), this.$options.components)
             for (const v of Object.values(this.$options.components))
               a(v.styles);
-          const p = ((V = this.$el.getRootNode()) == null ? void 0 : V.host) || H(this.$el);
-          p && (d && p.querySelectorAll("[hidden]").forEach((q) => {
-            q.removeAttribute("hidden");
-          }), p.querySelectorAll(`[${l}]`).forEach((x) => {
-            x.remove();
+          const p = ((x = this.$el.getRootNode()) == null ? void 0 : x.host) || B(this.$el);
+          p && (h && p.querySelectorAll("[hidden]").forEach((F) => {
+            F.removeAttribute("hidden");
+          }), p.querySelectorAll(`[${l}]`).forEach((D) => {
+            D.remove();
           }));
         },
         unmounted() {
@@ -276,30 +276,30 @@ const ne = ({
         };
         window.__VUE_DEVTOOLS_GLOBAL_HOOK__.emit("app:init", f, f.version, p), window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = f;
       }
-      const z = P == null ? void 0 : P.reduce((a, p) => {
-        const w = se(p);
+      const k = P == null ? void 0 : P.reduce((a, p) => {
+        const w = oe(p);
         return a[w] = (A) => {
           g.emit(p, A);
         }, a;
-      }, {}), k = (L = e == null ? void 0 : e.namedSlots) == null ? void 0 : L.reduce((a, p) => (a[p] = () => o("slot", {
+      }, {}), q = (L = e == null ? void 0 : e.namedSlots) == null ? void 0 : L.reduce((a, p) => (a[p] = () => o("slot", {
         name: p
       }), a), {});
       return () => o(
         e,
         {
-          ...K,
-          ...z
+          ...U,
+          ...k
         },
         {
           default: () => o("slot"),
-          ...k,
-          ...U
+          ...q,
+          ...z
         }
       );
     }
   }, { shadowRoot: !y, nonce: u });
-  return c().then(() => M);
-}, ce = ({
+  return c().then(() => K);
+}, ae = ({
   elementName: e,
   rootComponent: r,
   plugins: t,
@@ -310,10 +310,10 @@ const ne = ({
   getCurrentInstance: _,
   disableRemoveStylesOnUnmount: E = !1,
   disableShadowDOM: y = !1,
-  replaceRootWithHostInCssFramework: h = !1,
+  replaceRootWithHostInCssFramework: d = !1,
   asyncInitialization: c = () => Promise.resolve(),
   loaderAttribute: l = "data-web-component-loader",
-  hideSlotContentUntilMounted: d = !1,
+  hideSlotContentUntilMounted: h = !1,
   nonce: u
   // Used for Content Security Policy (CSP) compliance - will be applied to inline styles
 }) => {
@@ -343,7 +343,7 @@ const ne = ({
     console.warn("No getCurrentInstance provided. Please provide a getCurrentInstance to create a web component.");
     return;
   }
-  ne({
+  re({
     rootComponent: r,
     plugins: t,
     cssFrameworkStyles: s,
@@ -354,10 +354,10 @@ const ne = ({
     elementName: e,
     disableRemoveStylesOnUnmount: E,
     disableShadowDOM: y,
-    replaceRootWithHostInCssFramework: h,
+    replaceRootWithHostInCssFramework: d,
     asyncInitialization: c,
     loaderAttribute: l,
-    hideSlotContentUntilMounted: d,
+    hideSlotContentUntilMounted: h,
     nonce: u
   }).then((b) => {
     customElements.define(
@@ -367,8 +367,8 @@ const ne = ({
   });
 };
 export {
-  ce as createWebComponent,
-  ce as default,
-  ne as defineCustomElement,
-  ee as defineCustomElementSFC
+  ae as createWebComponent,
+  ae as default,
+  re as defineCustomElement,
+  te as defineCustomElementSFC
 };
