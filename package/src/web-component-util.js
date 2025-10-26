@@ -51,6 +51,7 @@ export const defineCustomElement = ({
     ? replaceRootWithHost(cssFrameworkStyles) 
     : cssFrameworkStyles;
     const customElementConfig = customElementDefiner({
+    name: 'vue-custom-element-root-component',
     nonce,
     props: {
       ...rootComponent.props,
@@ -78,13 +79,20 @@ export const defineCustomElement = ({
         mounted() {
           console.log('this.$', this.$);
           console.log('this.$?.type?.name', this.$?.type?.name);
+          console.log('rootComponent', rootComponent);
+
           if (this.$?.type?.name === 'vue-custom-element-root-component') {
-            const frameworkStyle = document.createElement('style');
-            frameworkStyle.innerText = modifiedCssFrameworkStyles.join().replace(/\n/g, '');
-            if (nonce) frameworkStyle.setAttribute('nonce', nonce);
-            nearestElement(this.$el).prepend(frameworkStyle);
+            console.log('modifiedCssFrameworkStyles', modifiedCssFrameworkStyles);
+            if(modifiedCssFrameworkStyles) {
+              console.log('modifiedCssFrameworkStyles',modifiedCssFrameworkStyles);
+              const frameworkStyle = document.createElement('style');
+              frameworkStyle.innerText = modifiedCssFrameworkStyles.join().replace(/\n/g, '');
+              if (nonce) frameworkStyle.setAttribute('nonce', nonce);
+              console.log('this.$el', this.$el);
+              nearestElement(this.$el).prepend(frameworkStyle);
+            }
             return;
-          }          
+          }
 
           const insertStyles = (styles) => {
             if (styles?.length) {

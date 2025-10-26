@@ -1,7 +1,7 @@
 var X = Object.defineProperty;
 var I = (e, r, t) => r in e ? X(e, r, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[r] = t;
 var b = (e, r, t) => I(e, typeof r != "symbol" ? r + "" : r, t);
-import { defineComponent as Z, nextTick as J, render as H, createVNode as Q, h as B } from "vue";
+import { defineComponent as Z, nextTick as J, render as H, createVNode as Q, h as k } from "vue";
 /**
 * @vue/shared v3.5.13
 * (c) 2018-present Yuxi (Evan) You and Vue contributors
@@ -9,14 +9,14 @@ import { defineComponent as Z, nextTick as J, render as H, createVNode as Q, h a
 **/
 process.env.NODE_ENV !== "production" && Object.freeze({});
 process.env.NODE_ENV !== "production" && Object.freeze([]);
-const Y = Object.assign, M = Array.isArray, ee = (e) => typeof e == "string", U = (e) => {
+const Y = Object.assign, B = Array.isArray, ee = (e) => typeof e == "string", F = (e) => {
   const r = /* @__PURE__ */ Object.create(null);
   return (t) => r[t] || (r[t] = e(t));
-}, te = /-(\w)/g, T = U(
+}, te = /-(\w)/g, T = F(
   (e) => e.replace(te, (r, t) => t ? t.toUpperCase() : "")
-), se = /\B([A-Z])/g, N = U(
+), se = /\B([A-Z])/g, g = F(
   (e) => e.replace(se, "-$1").toLowerCase()
-), K = (e) => {
+), M = (e) => {
   const r = ee(e) ? Number(e) : NaN;
   return isNaN(r) ? e : r;
 };
@@ -72,24 +72,24 @@ class L extends ne {
     }), this._ob.observe(this, { attributes: !0 });
     const t = (o, n = !1) => {
       var v;
-      const { props: i } = o, f = this._collectNestedStyles(o);
-      let y;
-      if (i && !M(i))
+      const { props: i } = o, _ = this._collectNestedStyles(o);
+      let E;
+      if (i && !B(i))
         for (const u in i) {
           const c = i[u];
-          (c === Number || c && c.type === Number) && (u in this._props && (this._props[u] = K(this._props[u])), (y || (y = /* @__PURE__ */ Object.create(null)))[T(u)] = !0);
+          (c === Number || c && c.type === Number) && (u in this._props && (this._props[u] = M(this._props[u])), (E || (E = /* @__PURE__ */ Object.create(null)))[T(u)] = !0);
         }
-      if (this._numberProps = y, n && this._resolveProps(o), !this._config.shadowRoot) {
+      if (this._numberProps = E, n && this._resolveProps(o), !this._config.shadowRoot) {
         this._slots = {};
         const u = (c) => Array.from(c).map((a) => {
           var d;
           if (a.nodeType === Node.ELEMENT_NODE) {
-            const p = a, E = Object.fromEntries(
-              Array.from(p.attributes).map((g) => [g.name, g.value])
+            const p = a, y = Object.fromEntries(
+              Array.from(p.attributes).map((N) => [N.name, N.value])
             );
-            return B(
+            return k(
               p.tagName.toLowerCase(),
-              E,
+              y,
               u(p.childNodes)
             );
           } else if (a.nodeType === Node.TEXT_NODE)
@@ -100,10 +100,10 @@ class L extends ne {
           const a = c.nodeType === Node.ELEMENT_NODE && c.getAttribute("slot") || "default";
           if (this._slots[a] || (this._slots[a] = []), c.nodeType === Node.ELEMENT_NODE) {
             const d = c, p = Object.fromEntries(
-              Array.from(d.attributes).map((E) => [E.name, E.value])
+              Array.from(d.attributes).map((y) => [y.name, y.value])
             );
             this._slots[a].push(
-              B(
+              k(
                 d.tagName.toLowerCase(),
                 p,
                 u(d.childNodes)
@@ -116,12 +116,12 @@ class L extends ne {
         }
         this.replaceChildren();
       }
-      this._applyStyles(f), this._update();
+      this._applyStyles(_), this._update();
     }, s = this._def.__asyncLoader;
     s ? s().then((o) => t(o, !0)) : t(this._def);
   }
   _resolveProps(t) {
-    const { props: s } = t, o = M(s) ? s : Object.keys(s || {});
+    const { props: s } = t, o = B(s) ? s : Object.keys(s || {});
     for (const n of Object.keys(this))
       n[0] !== "_" && o.includes(n) && this._setProp(n, this[n], !0, !1);
     for (const n of o.map(T))
@@ -137,7 +137,7 @@ class L extends ne {
   _setAttr(t) {
     let s = this.hasAttribute(t) ? this.getAttribute(t) : void 0;
     const o = T(t);
-    this._numberProps && this._numberProps[o] && (s = K(s)), this._setProp(o, s, !1);
+    this._numberProps && this._numberProps[o] && (s = M(s)), this._setProp(o, s, !1);
   }
   /**
    * @internal
@@ -149,7 +149,7 @@ class L extends ne {
    * @internal
    */
   _setProp(t, s, o = !0, n = !0) {
-    s !== this._props[t] && (this._props[t] = s, n && this._instance && this._update(), o && (s === !0 ? this.setAttribute(N(t), "") : typeof s == "string" || typeof s == "number" ? this.setAttribute(N(t), s + "") : s || this.removeAttribute(N(t))));
+    s !== this._props[t] && (this._props[t] = s, n && this._instance && this._update(), o && (s === !0 ? this.setAttribute(g(t), "") : typeof s == "string" || typeof s == "number" ? this.setAttribute(g(t), s + "") : s || this.removeAttribute(g(t))));
   }
   _update() {
     H(this._createVNode(), this._root);
@@ -158,15 +158,15 @@ class L extends ne {
     const t = Q(this._def, Y({}, this._props), this._slots);
     return this._instance || (t.ce = (s) => {
       this._instance = s, s.isCE = !0;
-      const o = (i, f) => {
+      const o = (i, _) => {
         this.dispatchEvent(
           new CustomEvent(i, {
-            detail: f
+            detail: _
           })
         );
       };
-      s.emit = (i, ...f) => {
-        o(i, f), N(i) !== i && o(N(i), f);
+      s.emit = (i, ..._) => {
+        o(i, _), g(i) !== i && o(g(i), _);
       };
       let n = this;
       for (; n = n && (n.parentNode || n.host); )
@@ -213,8 +213,8 @@ const ce = ({
   h: o,
   createApp: n,
   getCurrentInstance: i,
-  elementName: f,
-  disableRemoveStylesOnUnmount: y,
+  elementName: _,
+  disableRemoveStylesOnUnmount: E,
   disableShadowDOM: v,
   replaceRootWithHostInCssFramework: u,
   asyncInitialization: c,
@@ -223,7 +223,8 @@ const ce = ({
   nonce: p
 }) => {
   console.log("defineCustomElement called");
-  const E = v ? oe : s, g = u ? ie(t) : t, k = E({
+  const y = v ? oe : s, N = u ? ie(t) : t, K = y({
+    name: "vue-custom-element-root-component",
     nonce: p,
     props: {
       ...e.props,
@@ -231,8 +232,8 @@ const ce = ({
       // v-model support
     },
     emits: e == null ? void 0 : e.emits,
-    setup(z, { slots: q }) {
-      var j;
+    setup(U, { slots: z }) {
+      var $;
       const S = [...(e == null ? void 0 : e.emits) || [], "update:modelValue"], m = n();
       if (m.component("app-root", e), e.provide) {
         const l = typeof e.provide == "function" ? e.provide() : e.provide;
@@ -242,33 +243,36 @@ const ce = ({
       }
       m.mixin({
         mounted() {
-          var w, A, x, V, $, D, R;
-          if (console.log("this.$", this.$), console.log("this.$?.type?.name", (A = (w = this.$) == null ? void 0 : w.type) == null ? void 0 : A.name), ((V = (x = this.$) == null ? void 0 : x.type) == null ? void 0 : V.name) === "vue-custom-element-root-component") {
-            const _ = document.createElement("style");
-            _.innerText = g.join().replace(/\n/g, ""), p && _.setAttribute("nonce", p), P(this.$el).prepend(_);
+          var w, A, j, x, V, D, C;
+          if (console.log("this.$", this.$), console.log("this.$?.type?.name", (A = (w = this.$) == null ? void 0 : w.type) == null ? void 0 : A.name), console.log("rootComponent", e), ((x = (j = this.$) == null ? void 0 : j.type) == null ? void 0 : x.name) === "vue-custom-element-root-component") {
+            if (console.log("modifiedCssFrameworkStyles", N), N) {
+              console.log("modifiedCssFrameworkStyles", N);
+              const f = document.createElement("style");
+              f.innerText = N.join().replace(/\n/g, ""), p && f.setAttribute("nonce", p), console.log("this.$el", this.$el), P(this.$el).prepend(f);
+            }
             return;
           }
-          const l = (_) => {
-            _ != null && _.length && (this.__style = document.createElement("style"), this.__style.innerText = _.join().replace(/\n/g, ""), p && this.__style.setAttribute("nonce", p), P(this.$el).append(this.__style));
+          const l = (f) => {
+            f != null && f.length && (this.__style = document.createElement("style"), this.__style.innerText = f.join().replace(/\n/g, ""), p && this.__style.setAttribute("nonce", p), P(this.$el).append(this.__style));
           };
-          if (console.log("this.$?.type.styles", ($ = this.$) == null ? void 0 : $.type.styles), l((D = this.$) == null ? void 0 : D.type.styles), this.$options.components)
-            for (const _ of Object.values(this.$options.components))
-              console.log("comp.styles", _.styles), l(_.styles);
-          const h = ((R = this.$el.getRootNode()) == null ? void 0 : R.host) || P(this.$el);
+          if (console.log("this.$?.type.styles", (V = this.$) == null ? void 0 : V.type.styles), l((D = this.$) == null ? void 0 : D.type.styles), this.$options.components)
+            for (const f of Object.values(this.$options.components))
+              console.log("comp.styles", f.styles), l(f.styles);
+          const h = ((C = this.$el.getRootNode()) == null ? void 0 : C.host) || P(this.$el);
           h && (d && h.querySelectorAll("[hidden]").forEach((W) => {
             W.removeAttribute("hidden");
-          }), h.querySelectorAll(`[${a}]`).forEach((C) => {
-            C.remove();
+          }), h.querySelectorAll(`[${a}]`).forEach((R) => {
+            R.remove();
           }));
         },
         unmounted() {
           var l;
-          y || (l = this.__style) == null || l.remove();
+          E || (l = this.__style) == null || l.remove();
         }
       }), m.use(r);
       const O = i();
       if (Object.assign(O.appContext, m._context), Object.assign(O.provides, m._context.provides), process.env.NODE_ENV === "development" && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
-        const l = document.querySelector(f);
+        const l = document.querySelector(_);
         m._container = l, m._instance = O;
         const h = {
           Comment: Symbol("v-cmt"),
@@ -278,29 +282,29 @@ const ce = ({
         };
         window.__VUE_DEVTOOLS_GLOBAL_HOOK__.emit("app:init", m, m.version, h), window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = m;
       }
-      const F = S == null ? void 0 : S.reduce((l, h) => {
+      const q = S == null ? void 0 : S.reduce((l, h) => {
         const w = re(h);
         return l[w] = (A) => {
           O.emit(h, A);
         }, l;
-      }, {}), G = (j = e == null ? void 0 : e.namedSlots) == null ? void 0 : j.reduce((l, h) => (l[h] = () => o("slot", {
+      }, {}), G = ($ = e == null ? void 0 : e.namedSlots) == null ? void 0 : $.reduce((l, h) => (l[h] = () => o("slot", {
         name: h
       }), l), {});
       return () => o(
         e,
         {
-          ...z,
-          ...F
+          ...U,
+          ...q
         },
         {
           default: () => o("slot"),
           ...G,
-          ...q
+          ...z
         }
       );
     }
   }, { shadowRoot: !v, nonce: p });
-  return c().then(() => k);
+  return c().then(() => K);
 }, pe = ({
   elementName: e,
   rootComponent: r,
@@ -309,8 +313,8 @@ const ce = ({
   VueDefineCustomElement: o,
   h: n,
   createApp: i,
-  getCurrentInstance: f,
-  disableRemoveStylesOnUnmount: y = !1,
+  getCurrentInstance: _,
+  disableRemoveStylesOnUnmount: E = !1,
   disableShadowDOM: v = !1,
   replaceRootWithHostInCssFramework: u = !1,
   asyncInitialization: c = () => Promise.resolve(),
@@ -341,7 +345,7 @@ const ce = ({
     console.warn("No createApp provided. Please provide a createApp to create a web component.");
     return;
   }
-  if (!f) {
+  if (!_) {
     console.warn("No getCurrentInstance provided. Please provide a getCurrentInstance to create a web component.");
     return;
   }
@@ -352,19 +356,19 @@ const ce = ({
     VueDefineCustomElement: o,
     h: n,
     createApp: i,
-    getCurrentInstance: f,
+    getCurrentInstance: _,
     elementName: e,
-    disableRemoveStylesOnUnmount: y,
+    disableRemoveStylesOnUnmount: E,
     disableShadowDOM: v,
     replaceRootWithHostInCssFramework: u,
     asyncInitialization: c,
     loaderAttribute: a,
     hideSlotContentUntilMounted: d,
     nonce: p
-  }).then((E) => {
+  }).then((y) => {
     customElements.define(
       e,
-      E
+      y
     );
   });
 };
