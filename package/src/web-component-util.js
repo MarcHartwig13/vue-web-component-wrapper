@@ -82,15 +82,7 @@ export const defineCustomElement = ({
           console.log('rootComponent', rootComponent);
 
           if (this.$?.type?.name === 'vue-custom-element-root-component') {
-            console.log('modifiedCssFrameworkStyles', modifiedCssFrameworkStyles);
-            if(modifiedCssFrameworkStyles) {
-              console.log('modifiedCssFrameworkStyles',modifiedCssFrameworkStyles);
-              const frameworkStyle = document.createElement('style');
-              frameworkStyle.innerText = modifiedCssFrameworkStyles.join().replace(/\n/g, '');
-              if (nonce) frameworkStyle.setAttribute('nonce', nonce);
-              console.log('this.$el', this.$el);
-              nearestElement(this.$el).prepend(frameworkStyle);
-            }
+            console.log('is vue-custom-element-root-component');
             return;
           }
 
