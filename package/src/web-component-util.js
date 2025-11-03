@@ -44,7 +44,7 @@ export const defineCustomElement = ({
                                       nonce
                                     }) =>
 {
-  const customElementDefiner = disableShadowDOM ? VueDefineCustomElementPatch : VueDefineCustomElement
+  const customElementDefiner = VueDefineCustomElementPatch
 
   const modifiedCssFrameworkStyles = replaceRootWithHostInCssFramework
     ? replaceRootWithHost(cssFrameworkStyles)
