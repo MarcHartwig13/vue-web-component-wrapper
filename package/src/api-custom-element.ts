@@ -381,6 +381,7 @@ export class VueElement extends BaseClass {
         this.replaceChildren();
       }
 
+      console.log('__applyStyles fired');
       // apply CSS
       this._applyStyles(styles)
 

@@ -78,10 +78,12 @@ export const defineCustomElement = ({
       app.mixin({
         mounted() {
           if (this.$?.type?.name === 'vue-custom-element-root-component') {
+            console.log('is rootComponent');
             return;
           }
 
           const insertStyles = (styles) => {
+            console.log('insertStyles fired', styles);
             if (styles?.length) {
               this.__style = document.createElement('style')
               this.__style.innerText = styles.join().replace(/\n/g, '')
