@@ -27,38 +27,38 @@ function replaceRootWithHost(styles) {
 }
 
 export const defineCustomElement = ({
-  rootComponent,
-  plugins,
-  cssFrameworkStyles,
-  VueDefineCustomElement,
-  h,
-  createApp,
-  getCurrentInstance,
-  elementName,
-  disableRemoveStylesOnUnmount,
-  disableShadowDOM,
-  replaceRootWithHostInCssFramework,
-  asyncInitialization,
-  loaderAttribute,
-  hideSlotContentUntilMounted,
-  nonce
-}) =>
-  {
-    console.log('defineCustomElement called');
-    const customElementDefiner = disableShadowDOM ? VueDefineCustomElementPatch : VueDefineCustomElement
+                                      rootComponent,
+                                      plugins,
+                                      cssFrameworkStyles,
+                                      VueDefineCustomElement,
+                                      h,
+                                      createApp,
+                                      getCurrentInstance,
+                                      elementName,
+                                      disableRemoveStylesOnUnmount,
+                                      disableShadowDOM,
+                                      replaceRootWithHostInCssFramework,
+                                      asyncInitialization,
+                                      loaderAttribute,
+                                      hideSlotContentUntilMounted,
+                                      nonce
+                                    }) =>
+{
+  const customElementDefiner = disableShadowDOM ? VueDefineCustomElementPatch : VueDefineCustomElement
 
-    const modifiedCssFrameworkStyles = replaceRootWithHostInCssFramework
-    ? replaceRootWithHost(cssFrameworkStyles) 
+  const modifiedCssFrameworkStyles = replaceRootWithHostInCssFramework
+    ? replaceRootWithHost(cssFrameworkStyles)
     : cssFrameworkStyles;
-    const customElementConfig = customElementDefiner({
+  const customElementConfig = customElementDefiner({
     name: 'vue-custom-element-root-component',
+    styles: [modifiedCssFrameworkStyles],
     nonce,
     props: {
       ...rootComponent.props,
       modelValue: { type: [String, Number, Boolean, Array, Object] } // v-model support
-    }, 
+    },
     emits: rootComponent?.emits,
-    
+
     setup(props, { slots }) {
       const emitsList = [...(rootComponent?.emits || []), 'update:modelValue']
       const app = createApp()
@@ -66,23 +66,18 @@ export const defineCustomElement = ({
 
       if (rootComponent.provide) {
         const provide = typeof rootComponent.provide === 'function'
-          ? rootComponent.provide() 
+          ? rootComponent.provide()
           : rootComponent.provide;
-        
+
         // Setup provide
         Object.keys(provide).forEach(key => {
           app.provide(key, provide[key]);
         });
       }
-      
+
       app.mixin({
         mounted() {
-          console.log('this.$', this.$);
-          console.log('this.$?.type?.name', this.$?.type?.name);
-          console.log('rootComponent', rootComponent);
-
           if (this.$?.type?.name === 'vue-custom-element-root-component') {
-            console.log('is vue-custom-element-root-component');
             return;
           }
 
@@ -95,11 +90,9 @@ export const defineCustomElement = ({
             }
           }
 
-          console.log('this.$?.type.styles', this.$?.type.styles);
           insertStyles(this.$?.type.styles);
           if (this.$options.components) {
             for (const comp of Object.values(this.$options.components)) {
-              console.log('comp.styles', comp.styles);
               insertStyles(comp.styles);
             }
           }
@@ -112,7 +105,7 @@ export const defineCustomElement = ({
                 el.removeAttribute('hidden');
               });
             }
-            
+
             const loaderEls = host.querySelectorAll(`[${loaderAttribute}]`);
             loaderEls.forEach(el => {
               el.remove();
@@ -150,12 +143,12 @@ export const defineCustomElement = ({
         window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = app;
       }
 
-        // Forward all emitted events to the custom element
-        const eventListeners = emitsList?.reduce((acc, eventName) => {
-          const onEventName = convertToOnEventName(eventName);
-          acc[onEventName] = (e) => { inst.emit(eventName, e); };
-          return acc;
-        }, {});
+      // Forward all emitted events to the custom element
+      const eventListeners = emitsList?.reduce((acc, eventName) => {
+        const onEventName = convertToOnEventName(eventName);
+        acc[onEventName] = (e) => { inst.emit(eventName, e); };
+        return acc;
+      }, {});
 
       // Establish named slots with an onSlotchange listener that iterates over
       // all parent nodes of the slot (non recursive) and removes the "hidden" attribute from each.
