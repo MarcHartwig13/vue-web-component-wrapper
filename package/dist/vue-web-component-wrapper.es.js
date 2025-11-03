@@ -1,6 +1,6 @@
 var F = Object.defineProperty;
-var G = (e, n, t) => n in e ? F(e, n, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[n] = t;
-var m = (e, n, t) => G(e, typeof n != "symbol" ? n + "" : n, t);
+var G = (e, r, t) => r in e ? F(e, r, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[r] = t;
+var m = (e, r, t) => G(e, typeof r != "symbol" ? r + "" : r, t);
 import { defineComponent as W, nextTick as X, render as D, createVNode as I, h as R } from "vue";
 /**
 * @vue/shared v3.5.13
@@ -10,23 +10,23 @@ import { defineComponent as W, nextTick as X, render as D, createVNode as I, h a
 process.env.NODE_ENV !== "production" && Object.freeze({});
 process.env.NODE_ENV !== "production" && Object.freeze([]);
 const Z = Object.assign, $ = Array.isArray, J = (e) => typeof e == "string", B = (e) => {
-  const n = /* @__PURE__ */ Object.create(null);
-  return (t) => n[t] || (n[t] = e(t));
+  const r = /* @__PURE__ */ Object.create(null);
+  return (t) => r[t] || (r[t] = e(t));
 }, Q = /-(\w)/g, S = B(
-  (e) => e.replace(Q, (n, t) => t ? t.toUpperCase() : "")
+  (e) => e.replace(Q, (r, t) => t ? t.toUpperCase() : "")
 ), Y = /\B([A-Z])/g, N = B(
   (e) => e.replace(Y, "-$1").toLowerCase()
 ), C = (e) => {
-  const n = J(e) ? Number(e) : NaN;
-  return isNaN(n) ? e : n;
+  const r = J(e) ? Number(e) : NaN;
+  return isNaN(r) ? e : r;
 };
 /*!#__NO_SIDE_EFFECTS__*/
 // @__NO_SIDE_EFFECTS__
-function ee(e, n, t) {
+function ee(e, r, t) {
   const s = W(e);
   class o extends T {
     constructor(i) {
-      super(s, i, n, t);
+      super(s, i, r, t);
     }
   }
   return m(o, "def", s), o;
@@ -34,7 +34,7 @@ function ee(e, n, t) {
 const te = typeof HTMLElement < "u" ? HTMLElement : class {
 };
 class T extends te {
-  constructor(t, s = {}, o = { shadowRoot: !0 }, r) {
+  constructor(t, s = {}, o = { shadowRoot: !0 }, n) {
     super();
     /**
      * @internal
@@ -46,7 +46,7 @@ class T extends te {
     m(this, "_styles");
     m(this, "_slots", {});
     m(this, "_ob", null);
-    this._def = t, this._props = s, this._config = o, this._root && r ? r(this._createVNode(), this._root) : (this._config.shadowRoot !== !1 && this.attachShadow({ mode: "open" }), this._def.__asyncLoader || this._resolveProps(this._def));
+    this._def = t, this._props = s, this._config = o, this._root && n ? n(this._createVNode(), this._root) : (this._config.shadowRoot !== !1 && this.attachShadow({ mode: "open" }), this._def.__asyncLoader || this._resolveProps(this._def));
   }
   get _root() {
     return this._config.shadowRoot ? this.shadowRoot : this;
@@ -67,10 +67,10 @@ class T extends te {
     for (let o = 0; o < this.attributes.length; o++)
       this._setAttr(this.attributes[o].name);
     this._ob = new MutationObserver((o) => {
-      for (const r of o)
-        this._setAttr(r.attributeName);
+      for (const n of o)
+        this._setAttr(n.attributeName);
     }), this._ob.observe(this, { attributes: !0 });
-    const t = (o, r = !1) => {
+    const t = (o, n = !1) => {
       var y;
       const { props: i } = o, _ = this._collectNestedStyles(o);
       let E;
@@ -79,7 +79,7 @@ class T extends te {
           const c = i[d];
           (c === Number || c && c.type === Number) && (d in this._props && (this._props[d] = C(this._props[d])), (E || (E = /* @__PURE__ */ Object.create(null)))[S(d)] = !0);
         }
-      if (this._numberProps = E, r && this._resolveProps(o), !this._config.shadowRoot) {
+      if (this._numberProps = E, n && this._resolveProps(o), !this._config.shadowRoot) {
         this._slots = {};
         const d = (c) => Array.from(c).map((l) => {
           var h;
@@ -122,15 +122,15 @@ class T extends te {
   }
   _resolveProps(t) {
     const { props: s } = t, o = $(s) ? s : Object.keys(s || {});
-    for (const r of Object.keys(this))
-      r[0] !== "_" && o.includes(r) && this._setProp(r, this[r], !0, !1);
-    for (const r of o.map(S))
-      Object.defineProperty(this, r, {
+    for (const n of Object.keys(this))
+      n[0] !== "_" && o.includes(n) && this._setProp(n, this[n], !0, !1);
+    for (const n of o.map(S))
+      Object.defineProperty(this, n, {
         get() {
-          return this._getProp(r);
+          return this._getProp(n);
         },
         set(i) {
-          this._setProp(r, i);
+          this._setProp(n, i);
         }
       });
   }
@@ -148,8 +148,8 @@ class T extends te {
   /**
    * @internal
    */
-  _setProp(t, s, o = !0, r = !0) {
-    s !== this._props[t] && (this._props[t] = s, r && this._instance && this._update(), o && (s === !0 ? this.setAttribute(N(t), "") : typeof s == "string" || typeof s == "number" ? this.setAttribute(N(t), s + "") : s || this.removeAttribute(N(t))));
+  _setProp(t, s, o = !0, n = !0) {
+    s !== this._props[t] && (this._props[t] = s, n && this._instance && this._update(), o && (s === !0 ? this.setAttribute(N(t), "") : typeof s == "string" || typeof s == "number" ? this.setAttribute(N(t), s + "") : s || this.removeAttribute(N(t))));
   }
   _update() {
     D(this._createVNode(), this._root);
@@ -168,10 +168,10 @@ class T extends te {
       s.emit = (i, ..._) => {
         o(i, _), N(i) !== i && o(N(i), _);
       };
-      let r = this;
-      for (; r = r && (r.parentNode || r.host); )
-        if (r instanceof T) {
-          s.parent = r._instance, s.provides = r._instance.provides;
+      let n = this;
+      for (; n = n && (n.parentNode || n.host); )
+        if (n instanceof T) {
+          s.parent = n._instance, s.provides = n._instance.provides;
           break;
         }
     }), t;
@@ -203,15 +203,15 @@ function se(e) {
   return "on" + e.charAt(0).toUpperCase() + e.slice(1);
 }
 function oe(e) {
-  return typeof e == "string" ? e.replace(/:root/g, ":host") : Array.isArray(e) ? e.map((n) => n.replace(/:root/g, ":host")) : e;
+  return typeof e == "string" ? e.replace(/:root/g, ":host") : Array.isArray(e) ? e.map((r) => r.replace(/:root/g, ":host")) : e;
 }
-const re = ({
+const ne = ({
   rootComponent: e,
-  plugins: n,
+  plugins: r,
   cssFrameworkStyles: t,
   VueDefineCustomElement: s,
   h: o,
-  createApp: r,
+  createApp: n,
   getCurrentInstance: i,
   elementName: _,
   disableRemoveStylesOnUnmount: E,
@@ -223,6 +223,7 @@ const re = ({
   nonce: u
 }) => {
   const b = y ? ee : s, O = d ? oe(t) : t, M = b({
+    name: "vue-custom-element-root-component",
     styles: [O],
     nonce: u,
     props: {
@@ -233,7 +234,7 @@ const re = ({
     emits: e == null ? void 0 : e.emits,
     setup(K, { slots: U }) {
       var L;
-      const P = [...(e == null ? void 0 : e.emits) || [], "update:modelValue"], f = r();
+      const P = [...(e == null ? void 0 : e.emits) || [], "update:modelValue"], f = n();
       if (f.component("app-root", e), e.provide) {
         const a = typeof e.provide == "function" ? e.provide() : e.provide;
         Object.keys(a).forEach((p) => {
@@ -262,7 +263,7 @@ const re = ({
           var a;
           E || (a = this.__style) == null || a.remove();
         }
-      }), f.use(n);
+      }), f.use(r);
       const w = i();
       if (Object.assign(w.appContext, f._context), Object.assign(w.provides, f._context.provides), process.env.NODE_ENV === "development" && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
         const a = document.querySelector(_);
@@ -300,11 +301,11 @@ const re = ({
   return c().then(() => M);
 }, ce = ({
   elementName: e,
-  rootComponent: n,
+  rootComponent: r,
   plugins: t,
   cssFrameworkStyles: s,
   VueDefineCustomElement: o,
-  h: r,
+  h: n,
   createApp: i,
   getCurrentInstance: _,
   disableRemoveStylesOnUnmount: E = !1,
@@ -316,7 +317,7 @@ const re = ({
   nonce: u
   // Used for Content Security Policy (CSP) compliance - will be applied to inline styles
 }) => {
-  if (!n) {
+  if (!r) {
     console.warn("No root component provided. Please provide a root component to create a web component.");
     return;
   }
@@ -330,7 +331,7 @@ const re = ({
     );
     return;
   }
-  if (!r) {
+  if (!n) {
     console.warn("No h provided. Please provide an h to create a web component.");
     return;
   }
@@ -342,12 +343,12 @@ const re = ({
     console.warn("No getCurrentInstance provided. Please provide a getCurrentInstance to create a web component.");
     return;
   }
-  re({
-    rootComponent: n,
+  ne({
+    rootComponent: r,
     plugins: t,
     cssFrameworkStyles: s,
     VueDefineCustomElement: o,
-    h: r,
+    h: n,
     createApp: i,
     getCurrentInstance: _,
     elementName: e,
@@ -368,6 +369,6 @@ const re = ({
 export {
   ce as createWebComponent,
   ce as default,
-  re as defineCustomElement,
+  ne as defineCustomElement,
   ee as defineCustomElementSFC
 };
