@@ -50,6 +50,7 @@ export const defineCustomElement = ({
     ? replaceRootWithHost(cssFrameworkStyles) 
     : cssFrameworkStyles;
     const customElementConfig = customElementDefiner({
+    name: 'vue-custom-element-root-component',
     styles: [modifiedCssFrameworkStyles],
     nonce,
     props: {
